@@ -6,13 +6,14 @@
     <title>Notizblock</title>
     <link rel="stylesheet" href="style/standard.css" />
     <link rel="stylesheet" href="style/styles.css" />
-
+    <script src="/scripts/templates.js"></script>
     <script src="/scripts/script.js"></script>
   </head>
   <body onload="renderNotes()">
     <h1>Notizblock</h1>
-    <input type="text" id="noteInput" />
-    <button onclick="addNote()">Notiz speichern</button>
+    <input type="text" id="noteInputForTitle" required />
+    <input type="text" id="noteInput" required />
+    <button onclick="addNote(), saveData()">Notiz speichern</button>
     <h2>notes</h2>
     <div id="content"></div>
     <h2>trash</h2>
