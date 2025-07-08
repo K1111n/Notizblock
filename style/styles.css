@@ -33,4 +33,6 @@ button:hover{
     border: solid;
     border-radius: 5px;
     background-color: rgb(226, 190, 90);
+    word-wrap: break-word;
+    max-width: 700px;
 }
