@@ -12,16 +12,18 @@
   </head>
   <body onload="renderNotes(), renderArchiveNotes(), renderTrashNotes()">
     <h1>Notizblock</h1>
-
-    <label for="noteInputForTitle"><b>Notetitle:</b></label>
-    <input
-      type="text"
-      id="noteInputForTitle"
-      placeholder="Type the Notetitle"
-    />
-    <label for="noteInput"><b>Note:</b></label>
-    <input type="text" id="noteInput" placeholder="Type the Note" />
-    <button onclick="addNote()">Notiz speichern</button>
+    <form onsubmit="addNote()" ; return false;>
+      <label for="noteInputForTitle"><b>Notetitle:</b></label>
+      <input
+        type="text"
+        id="noteInputForTitle"
+        placeholder="Type the Notetitle"
+        required
+      />
+      <label for="noteInput"><b>Note:</b></label>
+      <input type="text" id="noteInput" placeholder="Type the Note" required />
+      <button type="submit">Notiz speichern</button>
+    </form>
     <div class="notes-section">
       <h2>Notes</h2>
       <div id="content"></div>

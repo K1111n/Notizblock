@@ -1,12 +1,3 @@
-// let notesTitles = ["Ba", "Aufgabe"];
-// let notes = ["banana", "apple"];
-
-// let archiveNotesTitles = [];
-// let archiveNotes = [];
-
-// let trashNotesTitles = [];
-// let trashNotes = [];
-
 let allNotes = {
   notesTitles: ["Ba", "Aufgabe"],
   notes: ["banana", "apple"],
@@ -84,46 +75,6 @@ function addNote() {
   }
 }
 
-// function transferFromNotesToArchive(indexNote) {
-//   let archiveNote = notes.splice(indexNote, 1);
-//   archiveNotes.push(archiveNote[0]);
-//   let archiveNotesTitle = notesTitles.splice(indexNote, 1);
-//   archiveNotesTitles.push(archiveNotesTitle[0]);
-//   save_get_LocalStorage_render();
-// }
-
-// function transferFromNoteToTrash(indexNote) {
-//   let trashNote = notes.splice(indexNote, 1);
-//   trashNotes.push(trashNote[0]);
-//   let trashNotesTitle = notesTitles.splice(indexNote, 1);
-//   trashNotesTitles.push(trashNotesTitle[0]);
-//   save_get_LocalStorage_render();
-// }
-
-// function transferFromArchiveToNotes(indexArchiveNote) {
-//   let archiveNote = archiveNotes.splice(indexArchiveNote, 1);
-//   notes.push(archiveNote[0]);
-//   let notesTitle = archiveNotesTitles.splice(indexArchiveNote, 1);
-//   notesTitles.push(notesTitle[0]);
-//   save_get_LocalStorage_render();
-// }
-
-// function transferFromArchiveToTrash(indexArchiveNote) {
-//   let archiveNote = archiveNotes.splice(indexArchiveNote, 1);
-//   trashNotes.push(archiveNote[0]);
-//   let trashNotesTitle = archiveNotesTitles.splice(indexArchiveNote, 1);
-//   trashNotesTitles.push(trashNotesTitle[0]);
-//   save_get_LocalStorage_render();
-// }
-
-// function transferFromTrashToNotes(indexTrashNote) {
-//   let trashNote = trashNotes.splice(indexTrashNote, 1);
-//   notes.push(trashNote[0]);
-//   let notesTitle = trashNotesTitles.splice(indexTrashNote, 1);
-//   notesTitles.push(notesTitle[0]);
-//   save_get_LocalStorage_render();
-// }
-
 function deleteNote(indexNote) {
   allNotes.trashNotes.splice(indexNote, 1);
   allNotes.trashNotesTitles.splice(indexNote, 1);
@@ -131,11 +82,20 @@ function deleteNote(indexNote) {
 }
 
 function saveToLocalStorage() {
+  saveToLocalStorage_Notes();
+  saveToLocalStorage_Archive();
+  saveToLocalStorage_Trash();
+}
+
+function saveToLocalStorage_Notes() {
   localStorage.setItem(
     "allNotes.notesTitles",
     JSON.stringify(allNotes.notesTitles)
   );
   localStorage.setItem("allNotes.notes", JSON.stringify(allNotes.notes));
+}
+
+function saveToLocalStorage_Archive() {
   localStorage.setItem(
     "allNotes.archiveNotesTitles",
     JSON.stringify(allNotes.archiveNotesTitles)
@@ -144,6 +104,9 @@ function saveToLocalStorage() {
     "allNotes.archiveNotes",
     JSON.stringify(allNotes.archiveNotes)
   );
+}
+
+function saveToLocalStorage_Trash() {
   localStorage.setItem(
     "allNotes.trashNotesTitles",
     JSON.stringify(allNotes.trashNotesTitles)
