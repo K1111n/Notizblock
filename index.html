@@ -10,7 +10,7 @@
     <script src="/scripts/templates.js"></script>
     <script src="/scripts/script.js"></script>
   </head>
-  <body onload="renderNotes()">
+  <body onload="renderNotes(), renderArchiveNotes(), renderTrashNotes()">
     <h1>Notizblock</h1>
 
     <label for="noteInputForTitle"><b>Notetitle:</b></label>
@@ -18,16 +18,18 @@
       type="text"
       id="noteInputForTitle"
       required
-      placeholder="Notetitle"
+      placeholder="Type the Notetitle"
     />
     <label for="noteInput"><b>Note:</b></label>
-    <input type="text" id="noteInput" required placeholder="Note" />
+    <input type="text" id="noteInput" placeholder="Type the Note" required />
     <button onclick="addNote()">Notiz speichern</button>
-    <h2>Notes</h2>
-    <div id="content"></div>
-    <h2>Archive</h2>
-    <div id="archive"></div>
-    <h2>Trash</h2>
-    <div id="trash_content"></div>
+    <div class="notes-section">
+      <h2>Notes</h2>
+      <div id="content"></div>
+      <h2>Archive</h2>
+      <div id="archive"></div>
+      <h2>Trash</h2>
+      <div id="trash_content"></div>
+    </div>
   </body>
 </html>
