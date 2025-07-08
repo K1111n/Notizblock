@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Notizblock</title>
+    <link rel="icon" type="image/x-icon" href="/assets/img/n_favicon.jpg" />
     <link rel="stylesheet" href="style/standard.css" />
     <link rel="stylesheet" href="style/styles.css" />
     <script src="/scripts/templates.js"></script>
@@ -11,12 +12,22 @@
   </head>
   <body onload="renderNotes()">
     <h1>Notizblock</h1>
-    <input type="text" id="noteInputForTitle" required />
-    <input type="text" id="noteInput" required />
-    <button onclick="addNote(), saveData()">Notiz speichern</button>
-    <h2>notes</h2>
+
+    <label for="noteInputForTitle"><b>Notetitle:</b></label>
+    <input
+      type="text"
+      id="noteInputForTitle"
+      required
+      placeholder="Notetitle"
+    />
+    <label for="noteInput"><b>Note:</b></label>
+    <input type="text" id="noteInput" required placeholder="Note" />
+    <button onclick="addNote()">Notiz speichern</button>
+    <h2>Notes</h2>
     <div id="content"></div>
-    <h2>trash</h2>
+    <h2>Archive</h2>
+    <div id="archive"></div>
+    <h2>Trash</h2>
     <div id="trash_content"></div>
   </body>
 </html>

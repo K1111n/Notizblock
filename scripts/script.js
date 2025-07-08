@@ -1,6 +1,9 @@
 let notesTitles = ["Ba", "Aufgabe"];
 let notes = ["banana", "apple"];
 
+let archiveNotesTitles = [];
+let archiveNotes = [];
+
 let trashNotesTitles = [];
 let trashNotes = [];
 
@@ -10,6 +13,19 @@ function renderNotes() {
   contentRef.innerHTML = "";
   for (let indexNote = 0; indexNote < notes.length; indexNote++) {
     contentRef.innerHTML += getNoteTemplate(indexNote);
+  }
+}
+
+function renderArchiveNotes() {
+  getFromLocalStorage();
+  let archiveContentRef = document.getElementById("archive");
+  archiveContentRef.innerHTML = "";
+  for (
+    let indexArchiveNote = 0;
+    indexArchiveNote < archiveNotes.length;
+    indexArchiveNote++
+  ) {
+    archiveContentRef.innerHTML += getArchiveNoteTemplate(indexArchiveNote);
   }
 }
 
@@ -34,18 +50,71 @@ function addNote() {
   noteInput = notes.push(noteInput);
   noteTitlesInput = notesTitles.push(noteTitlesInput);
   saveToLocalStorage();
+  getFromLocalStorage();
   renderNotes();
+  renderArchiveNotes();
+  renderTrashNotes();
   noteInputRef.value = "";
   noteTitleInputRef.value = "";
 }
 
-function transferToTrash(indexNote) {
+function transferFromNotesToArchive(indexNote) {
+  let archiveNote = notes.splice(indexNote, 1);
+  archiveNotes.push(archiveNote[0]);
+  let archiveNotesTitle = notesTitles.splice(indexNote, 1);
+  archiveNotesTitles.push(archiveNotesTitle[0]);
+  saveToLocalStorage();
+  getFromLocalStorage();
+  renderNotes();
+  renderArchiveNotes();
+  renderTrashNotes();
+}
+
+function transferFromNoteToTrash(indexNote) {
   let trashNote = notes.splice(indexNote, 1);
   trashNotes.push(trashNote[0]);
   let trashNotesTitle = notesTitles.splice(indexNote, 1);
   trashNotesTitles.push(trashNotesTitle[0]);
   saveToLocalStorage();
+  getFromLocalStorage();
   renderNotes();
+  renderArchiveNotes();
+  renderTrashNotes();
+}
+
+function transferFromArchiveToNotes(indexArchiveNote) {
+  let archiveNote = archiveNotes.splice(indexArchiveNote, 1);
+  notes.push(archiveNote[0]);
+  let notesTitle = archiveNotesTitles.splice(indexArchiveNote, 1);
+  notesTitles.push(notesTitle[0]);
+  saveToLocalStorage();
+  getFromLocalStorage();
+  renderNotes();
+  renderArchiveNotes();
+  renderTrashNotes();
+}
+
+function transferFromArchiveToTrash(indexArchiveNote) {
+  let archiveNote = archiveNotes.splice(indexArchiveNote, 1);
+  trashNotes.push(archiveNote[0]);
+  let trashNotesTitle = archiveNotesTitles.splice(indexArchiveNote, 1);
+  trashNotesTitles.push(trashNotesTitle[0]);
+  saveToLocalStorage();
+  getFromLocalStorage();
+  renderNotes();
+  renderArchiveNotes();
+  renderTrashNotes();
+}
+
+function transferFromTrashToNotes(indexTrashNote) {
+  let trashNote = trashNotes.splice(indexTrashNote, 1);
+  notes.push(trashNote[0]);
+  let notesTitle = trashNotesTitles.splice(indexTrashNote, 1);
+  notesTitles.push(notesTitle[0]);
+  saveToLocalStorage();
+  getFromLocalStorage();
+  renderNotes();
+  renderArchiveNotes();
   renderTrashNotes();
 }
 
@@ -53,6 +122,9 @@ function deleteNote(indexNote) {
   trashNotes.splice(indexNote, 1);
   trashNotesTitles.splice(indexNote, 1);
   saveToLocalStorage();
+  getFromLocalStorage();
+  renderNotes();
+  renderArchiveNotes();
   renderTrashNotes();
 }
 
@@ -60,6 +132,13 @@ function saveToLocalStorage() {
   localStorage.setItem("notesTitles", JSON.stringify(notesTitles));
 
   localStorage.setItem("notes", JSON.stringify(notes));
+
+  localStorage.setItem(
+    "archiveNotesTitles",
+    JSON.stringify(archiveNotesTitles)
+  );
+
+  localStorage.setItem("archiveNotes", JSON.stringify(archiveNotes));
 
   localStorage.setItem("trashNotesTitles", JSON.stringify(trashNotesTitles));
 
@@ -75,6 +154,18 @@ function getFromLocalStorage() {
   let myArrnotes = JSON.parse(localStorage.getItem("notes"));
   if (myArrnotes != null) {
     notes = myArrnotes;
+  }
+
+  let myArrArchiveNotesTitles = JSON.parse(
+    localStorage.getItem("archiveNotesTitles")
+  );
+  if (myArrArchiveNotesTitles != null) {
+    archiveNotesTitles = myArrArchiveNotesTitles;
+  }
+
+  let myArrArchiveNotes = JSON.parse(localStorage.getItem("archiveNotes"));
+  if (myArrArchiveNotes != null) {
+    archiveNotes = myArrArchiveNotes;
   }
 
   let myArrtrashNotesTitles = JSON.parse(
