@@ -14,6 +14,7 @@ function save_get_LocalStorage_render() {
   renderArchiveNotes();
   renderTrashNotes();
 }
+
 function moveNote(indexNote, startKey, destinationKey) {
   let note = allNotes[startKey].splice(indexNote, 1);
   allNotes[destinationKey].push(note[0]);
@@ -69,6 +70,22 @@ function addNote() {
   } else {
     noteInput = allNotes.notes.push(noteInput);
     noteTitlesInput = allNotes.notesTitles.push(noteTitlesInput);
+    save_get_LocalStorage_render();
+    noteInputRef.value = "";
+    noteTitleInputRef.value = "";
+  }
+}
+
+function editNote(indexNote) {
+  let noteInputRef = document.getElementById("noteInput");
+  let noteTitleInputRef = document.getElementById("noteInputForTitle");
+  let noteInput = noteInputRef.value;
+  let noteTitlesInput = noteTitleInputRef.value;
+  if (noteInput == "" || noteTitlesInput == "") {
+    return;
+  } else {
+    noteInput = allNotes.notes[indexNote];
+    noteTitlesInput = allNotes.notesTitles[indexNote];
     save_get_LocalStorage_render();
     noteInputRef.value = "";
     noteTitleInputRef.value = "";

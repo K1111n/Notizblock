@@ -6,6 +6,7 @@ function getNoteTemplate(indexNote) {
             <b>${allNotes.notesTitles[indexNote]}:</b>  ${allNotes.notes[indexNote]}
           </div>
           <div>
+            <button onclick="editNote(${indexNote})">E</button>
             <button onclick="moveNote(${indexNote}, 'notes', 'archiveNotes')">A</button>
             <button onclick="moveNote(${indexNote}, 'notes', 'trashNotes')">X</button>
           </div>

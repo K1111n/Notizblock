@@ -44,3 +44,6 @@ form{
     flex-direction: column;
     align-items: center;
 }
+textarea{
+    width: 300px;
+}
